@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MAUI_Data_Access.Models"
+    x:Class="MAUI_Data_Access.MainPage">
+
+    <Grid
+        Padding="30,20"
+        RowDefinitions="Auto,Auto,Auto,*"
+        RowSpacing="25">
+
+        <Label
+            Grid.Row="0"
+            Text="Dalvin Wolff - Local Storage"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1" />
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="Auto,*"
+            RowDefinitions="Auto,Auto,Auto"
+            ColumnSpacing="15"
+            RowSpacing="10">
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="First Name"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level2"
+                VerticalTextAlignment="Center" />
+
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                x:Name="txtFirstName"
+                Placeholder="Enter your first name" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Last Name"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level2"
+                VerticalTextAlignment="Center" />
+
+            <Entry
+                Grid.Row="1"
+                Grid.Column="1"
+                x:Name="txtLastName"
+                Placeholder="Enter your last name" />
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Date of Birth"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level2"
+                VerticalTextAlignment="Center" />
+
+            <DatePicker
+                Grid.Row="2"
+                Grid.Column="1"
+                x:Name="dpDateOfBirth"
+                Format="MM-dd-yyyy" />
+        </Grid>
+
+        <Button
+            Grid.Row="2"
+            x:Name="btnSave"
+            Text="Save Person"
+            Clicked="OnSaveClicked"
+            HorizontalOptions="Center" />
+
+        <CollectionView
+            Grid.Row="3"
+            VerticalOptions="Fill"
+            ItemsSource="{Binding People}"
+            SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Person">
+
+                    <Grid
+                        ColumnDefinitions="*,*,Auto"
+                        Padding="20"
+                        ColumnSpacing="10">
+
+                        <Label
+                            Grid.Column="0"
+                            Text="{Binding FirstName}"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding LastName}"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            Grid.Column="2"
+                            VerticalTextAlignment="Center">
+
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        Text="{Binding DoB, StringFormat='{0:MM-dd-yyyy}'}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+
+                        </Label>
+
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
